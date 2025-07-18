@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sast.sastreadtrack.mapper.UserMapper">
+    <!-- 根据学号查询用户 -->
+    <select id="selectByStudentId" resultType="com.sast.sastreadtrack.entity.User">
+        SELECT id, name, student_id, password
+        FROM user
+        WHERE student_id = #{studentId}
+    </select>
+
+    <!-- 新增用户 -->
+    <insert id="insert" parameterType="com.sast.sastreadtrack.entity.User">
+        INSERT INTO user (name, student_id, password)
+        VALUES (#{name}, #{studentId}, #{password})
+    </insert>
+
+    <!-- 根据id查询用户 -->
+    <select id="selectById" resultType="com.sast.sastreadtrack.entity.User">
+        SELECT id, name, student_id, password
+        FROM user
+        WHERE id = #{id}
+    </select>
+</mapper>

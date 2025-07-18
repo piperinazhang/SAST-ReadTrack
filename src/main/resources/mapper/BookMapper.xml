@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sast.sastreadtrack.mapper.BookMapper">
+    <!-- 新增书籍 -->
+    <insert id="insert" parameterType="com.sast.sastreadtrack.entity.Book">
+        INSERT INTO book (user_id, title, author, total_pages, read_pages, status)
+        VALUES (#{userId}, #{title}, #{author}, #{totalPages}, #{readPages}, #{status})
+    </insert>
+
+    <!-- 更新阅读进度 -->
+    <update id="updateReadProgress" parameterType="com.sast.sastreadtrack.entity.Book">
+        UPDATE book
+        SET read_pages = #{readPages},
+            status = #{status}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <!-- 删除书籍 -->
+    <delete id="deleteById">
+        DELETE FROM book
+        WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+
+    <!-- 查询用户的所有书籍 -->
+    <select id="selectByUserId" resultType="com.sast.sastreadtrack.entity.Book">
+        SELECT id, user_id, title, author, total_pages, read_pages, status
+        FROM book
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 根据阅读状态查询用户的书籍 -->
+    <select id="selectByUserIdAndStatus" resultType="com.sast.sastreadtrack.entity.Book">
+        SELECT id, user_id, title, author, total_pages, read_pages, status
+        FROM book
+        WHERE user_id = #{userId} AND status = #{status}
+    </select>
+
+    <!-- 模糊查询书籍 -->
+    <select id="searchBooks" resultType="com.sast.sastreadtrack.entity.Book">
+        SELECT id, user_id, title, author, total_pages, read_pages, status
+        FROM book
+        WHERE user_id = #{userId}
+        AND (title LIKE CONCAT('%', #{keyword}, '%') OR author LIKE CONCAT('%', #{keyword}, '%'))
+    </select>
+
+    <!-- 获取用户的阅读统计 -->
+    <select id="getReadingStats" resultType="com.sast.sastreadtrack.entity.Book">
+        SELECT
+            SUM(read_pages) as read_pages,
+            SUM(total_pages) as total_pages
+        FROM book
+        WHERE user_id = #{userId}
+    </select>
+</mapper>
