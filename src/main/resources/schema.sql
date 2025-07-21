@@ -1,3 +1,4 @@
+-- 这是一个定义数据库的文件:)
 -- 创建数据库
 CREATE DATABASE IF NOT EXISTS sast_readtrack DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -8,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL COMMENT '姓名',
     `student_id` VARCHAR(20) NOT NULL COMMENT '学号',
-    `password` VARCHAR(100) NOT NULL COMMENT '密码（加密存储）',
+    `password` VARCHAR(100) NOT NULL COMMENT '密码',
     `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
