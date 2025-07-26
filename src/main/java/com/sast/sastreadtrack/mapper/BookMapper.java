@@ -20,6 +20,12 @@ public interface BookMapper {
     int updateReadProgress(Book book);
 
     /**
+     * 更新阅读状态
+     * @param book 包含 bookId（id）、userId、status 的实体类
+     */
+    int updateStatus(Book book);
+
+    /**
      * 删除书籍
      */
     int deleteById(Long id, Long userId);

@@ -27,6 +27,15 @@ public interface BookService {
     boolean updateReadProgress(Long bookId, Integer readPages, Long userId);
 
     /**
+     * 更新阅读状态
+     * @param bookId 书籍ID
+     * @param status 阅读状态（未读/阅读中/已读）
+     * @param userId 用户ID（用于验证权限）
+     * @return 更新成功返回true
+     */
+    boolean updateStatus(Long bookId, String status, Long userId);
+
+    /**
      * 删除书籍（仅能删除自己的书籍）
      */
     boolean deleteBook(Long bookId, Long userId);

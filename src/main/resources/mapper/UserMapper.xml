@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sast.sastreadtrack.mapper.UserMapper">
+    <!--xml文件供参考，可调整，可使用注解方法-->
     <!-- 根据学号查询用户 -->
     <select id="selectByStudentId" resultType="com.sast.sastreadtrack.entity.User">
         SELECT id, name, student_id, password

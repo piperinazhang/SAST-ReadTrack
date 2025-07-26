@@ -43,6 +43,19 @@ public class BookController {
     }
 
     /**
+     * 更新阅读状态
+     * @param bookId 书籍ID
+     * @param status 阅读状态（未读/阅读中/已读）
+     */
+    @PutMapping("/{bookId}/status")
+    public ResponseEntity<Map<String, Object>> updateStatus(
+            @PathVariable Long bookId,
+            @RequestParam String status) {
+        // TODO: 实现更新状态逻辑
+        return null;
+    }
+
+    /**
      * 删除书籍（仅能删除自己的书籍）
      * @param bookId 书籍ID
      */
