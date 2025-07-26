@@ -26,20 +26,20 @@ public class BookController {
     @PostMapping("/add")
     public ResponseEntity<Map<String, Object>> addBook(@RequestBody Book book) {
         // TODO: 实现添加书籍逻辑
-        return null;
+
     }
 
     /**
      * 更新阅读进度
      * @param bookId 书籍ID
-     * @param readPages 已读页数
+     * @param currentPages 已读页数
      */
     @PutMapping("/{bookId}/progress")
     public ResponseEntity<Map<String, Object>> updateProgress(
             @PathVariable Long bookId,
-            @RequestParam Integer readPages) {
+            @RequestParam Integer currentPages) {
         // TODO: 实现更新进度逻辑
-        return null;
+
     }
 
     /**
@@ -52,7 +52,7 @@ public class BookController {
             @PathVariable Long bookId,
             @RequestParam String status) {
         // TODO: 实现更新状态逻辑
-        return null;
+
     }
 
     /**
@@ -62,7 +62,7 @@ public class BookController {
     @DeleteMapping("/{bookId}")
     public ResponseEntity<Map<String, Object>> deleteBook(@PathVariable Long bookId) {
         // TODO: 实现删除书籍逻辑
-        return null;
+
     }
 
     /**
@@ -72,7 +72,7 @@ public class BookController {
     @GetMapping("/list")
     public ResponseEntity<List<Book>> getBooks(@RequestParam(required = false) String status) {
         // TODO: 实现查询书籍逻辑
-        return null;
+
     }
 
     /**
@@ -82,7 +82,7 @@ public class BookController {
     @GetMapping("/search")
     public ResponseEntity<List<Book>> searchBooks(@RequestParam String keyword) {
         // TODO: 实现模糊查询逻辑
-        return null;
+
     }
 
     /**
@@ -91,6 +91,6 @@ public class BookController {
     @GetMapping("/stats")
     public ResponseEntity<Map<String, Object>> getReadingStats() {
         // TODO: 实现阅读统计逻辑
-        return null;
+
     }
 }

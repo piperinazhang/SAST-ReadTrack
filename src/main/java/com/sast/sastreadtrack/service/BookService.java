@@ -20,11 +20,11 @@ public interface BookService {
     /**
      * 更新阅读进度
      * @param bookId 书籍ID
-     * @param readPages 已读页数
+     * @param currentPages 已读页数
      * @param userId 用户ID（用于验证权限）
      * @return 更新成功返回true
      */
-    boolean updateReadProgress(Long bookId, Integer readPages, Long userId);
+    boolean updateReadProgress(Long bookId, Integer currentPages, Long userId);
 
     /**
      * 更新阅读状态

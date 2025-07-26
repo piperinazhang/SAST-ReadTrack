@@ -4,14 +4,14 @@
     <!--xml文件供参考，可调整，可使用注解方法-->
     <!-- 新增书籍 -->
     <insert id="insert" parameterType="com.sast.sastreadtrack.entity.Book">
-        INSERT INTO book (user_id, title, author, total_pages, read_pages, status)
-        VALUES (#{userId}, #{title}, #{author}, #{totalPages}, #{readPages}, #{status})
+        INSERT INTO book (user_id, title, author, total_pages, current_page, created_at)
+        VALUES (#{userId}, #{title}, #{author}, #{totalPages}, #{currentPage}, #{createdAt})
     </insert>
 
     <!-- 更新阅读进度 -->
     <update id="updateReadProgress" parameterType="com.sast.sastreadtrack.entity.Book">
         UPDATE book
-        SET read_pages = #{readPages},
+        SET read_pages = #{currentPages},
             status = #{status}
         WHERE id = #{id} AND user_id = #{userId}
     </update>

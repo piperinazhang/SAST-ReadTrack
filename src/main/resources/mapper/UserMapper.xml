@@ -3,16 +3,16 @@
 <mapper namespace="com.sast.sastreadtrack.mapper.UserMapper">
     <!--xml文件供参考，可调整，可使用注解方法-->
     <!-- 根据学号查询用户 -->
-    <select id="selectByStudentId" resultType="com.sast.sastreadtrack.entity.User">
-        SELECT id, name, student_id, password
+    <select id="selectByUsername" resultType="com.sast.sastreadtrack.entity.User">
+        SELECT id, username, password, created_at AS createdAt
         FROM user
-        WHERE student_id = #{studentId}
+        WHERE username = #{username}
     </select>
 
     <!-- 新增用户 -->
     <insert id="insert" parameterType="com.sast.sastreadtrack.entity.User">
-        INSERT INTO user (name, student_id, password)
-        VALUES (#{name}, #{studentId}, #{password})
+        INSERT INTO user (username, password, created_at)
+        VALUES (#{username}, #{password}, #{createdAt})
     </insert>
 
     <!-- 根据id查询用户 -->

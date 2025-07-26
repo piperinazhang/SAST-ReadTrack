@@ -26,7 +26,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> register(@RequestBody User user) {
         // TODO: 实现注册逻辑
-        return null;
+
     }
 
     /**
@@ -36,6 +36,6 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> loginForm) {
         // TODO: 实现登录逻辑
-        return null;
+
     }
 }

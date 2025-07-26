@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public boolean updateReadProgress(Long bookId, Integer readPages, Long userId) {
+    public boolean updateReadProgress(Long bookId, Integer currentPages, Long userId) {
         //更新阅读进度
     }
 
