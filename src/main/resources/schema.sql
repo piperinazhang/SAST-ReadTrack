@@ -6,7 +6,7 @@ USE sast_readtrack;
 
 -- 用户表
 CREATE TABLE user (
-                      id LONG PRIMARY KEY AUTO_INCREMENT,
+                      id BIGINT PRIMARY KEY AUTO_INCREMENT,
                       username VARCHAR(50) UNIQUE NOT NULL,
                       password VARCHAR(50) NOT NULL,
                       created_at DATETIME
@@ -14,12 +14,12 @@ CREATE TABLE user (
 
 -- 书籍表
 CREATE TABLE book (
-                      id LONG PRIMARY KEY AUTO_INCREMENT,
+                      id BIGINT PRIMARY KEY AUTO_INCREMENT,
                       title VARCHAR(100) NOT NULL,
                       author VARCHAR(50),
                       total_pages INT NOT NULL,
                       current_page INT DEFAULT 0,
-                      user_id LONG,
+                      user_id BIGINT,
                       created_at DATETIME
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
