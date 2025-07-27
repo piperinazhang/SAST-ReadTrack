@@ -21,7 +21,7 @@ CREATE TABLE book (
                       current_page INT DEFAULT 0,
                       user_id BIGINT,
                       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,  -- 默认当前时间
-                      status VARCHAR(20) NOT NULL DEFAULT '0',  -- 阅读状态:0未读 1阅读中 2已读
+                      status ENUM('0', '1', '2') NOT NULL DEFAULT '0',  -- 阅读状态:0未读 1阅读中 2已读
     -- 外键关联用户表
                       FOREIGN KEY (user_id) REFERENCES t_user(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
