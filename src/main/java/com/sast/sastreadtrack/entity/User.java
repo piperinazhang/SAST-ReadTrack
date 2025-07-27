@@ -15,4 +15,3 @@ public class User {
 
     // getter/setter 省略
 }
-
