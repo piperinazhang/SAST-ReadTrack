@@ -50,7 +50,7 @@ public class BookController {
     @PutMapping("/{bookId}/status")
     public ResponseEntity<Map<String, Object>> updateStatus(
             @PathVariable Long bookId,
-            @RequestParam Integer status) {
+            @RequestParam String status) {
         // TODO: 实现更新状态逻辑
 
     }
@@ -70,7 +70,7 @@ public class BookController {
      * @param status 阅读状态（可选）
      */
     @GetMapping("/list")
-    public ResponseEntity<List<Book>> getBooks(@RequestParam(required = false) Integer status) {
+    public ResponseEntity<List<Book>> getBooks(@RequestParam(required = false) String status) {
         // TODO: 实现查询书籍逻辑
 
     }

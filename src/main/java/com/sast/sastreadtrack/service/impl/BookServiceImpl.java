@@ -32,7 +32,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public boolean updateStatus(Long bookId, Integer status, Long userId) {
+    public boolean updateStatus(Long bookId, String status, Long userId) {
         // 更新阅读状态
     }
 
@@ -48,7 +48,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> getBooksByStatus(Long userId, Integer status) {
+    public List<Book> getBooksByStatus(Long userId, String status) {
         //按阅读状态筛选书籍
     }
 

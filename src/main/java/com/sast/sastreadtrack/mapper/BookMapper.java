@@ -38,7 +38,7 @@ public interface BookMapper {
     /**
      * 根据阅读状态查询用户的书籍
      */
-    List<Book> selectByUserIdAndStatus(Long userId, Integer status);
+    List<Book> selectByUserIdAndStatus(Long userId, String status);
 
     /**
      * 模糊查询书籍

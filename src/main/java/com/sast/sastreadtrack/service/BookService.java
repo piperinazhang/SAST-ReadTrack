@@ -33,7 +33,7 @@ public interface BookService {
      * @param userId 用户ID（用于验证权限）
      * @return 更新成功返回true
      */
-    boolean updateStatus(Long bookId, Integer status, Long userId);
+    boolean updateStatus(Long bookId, String status, Long userId);
 
     /**
      * 删除书籍（仅能删除自己的书籍）
@@ -48,7 +48,7 @@ public interface BookService {
     /**
      * 按阅读状态筛选书籍
      */
-    List<Book> getBooksByStatus(Long userId, Integer status);
+    List<Book> getBooksByStatus(Long userId, String status);
 
     /**
      * 模糊查询书籍
