@@ -11,7 +11,7 @@
     <!-- 更新阅读进度 -->
     <update id="updateReadProgress" parameterType="com.sast.sastreadtrack.entity.Book">
         UPDATE book
-        SET read_pages = #{currentPages},
+        SET current_pages = #{currentPages},
             status = #{status}
         WHERE id = #{id} AND user_id = #{userId}
     </update>
@@ -31,21 +31,21 @@
 
     <!-- 查询用户的所有书籍 -->
     <select id="selectByUserId" resultType="com.sast.sastreadtrack.entity.Book">
-        SELECT id, user_id, title, author, total_pages, read_pages, status
+        SELECT id, user_id, title, author, total_pages, current_pages, status
         FROM book
         WHERE user_id = #{userId}
     </select>
 
     <!-- 根据阅读状态查询用户的书籍 -->
     <select id="selectByUserIdAndStatus" resultType="com.sast.sastreadtrack.entity.Book">
-        SELECT id, user_id, title, author, total_pages, read_pages, status
+        SELECT id, user_id, title, author, total_pages, current_pages, status
         FROM book
         WHERE user_id = #{userId} AND status = #{status}
     </select>
 
     <!-- 模糊查询书籍 -->
     <select id="searchBooks" resultType="com.sast.sastreadtrack.entity.Book">
-        SELECT id, user_id, title, author, total_pages, read_pages, status
+        SELECT id, user_id, title, author, total_pages, current_pages, status
         FROM book
         WHERE user_id = #{userId}
         AND (title LIKE CONCAT('%', #{keyword}, '%') OR author LIKE CONCAT('%', #{keyword}, '%'))
@@ -54,7 +54,7 @@
     <!-- 获取用户的阅读统计 -->
     <select id="getReadingStats" resultType="com.sast.sastreadtrack.entity.Book">
         SELECT
-            SUM(read_pages) as read_pages,
+            SUM(current_pages) as current_pages,
             SUM(total_pages) as total_pages
         FROM book
         WHERE user_id = #{userId}

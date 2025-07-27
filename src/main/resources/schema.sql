@@ -4,12 +4,12 @@ CREATE DATABASE IF NOT EXISTS sast_readtrack DEFAULT CHARACTER SET utf8mb4 COLLA
 
 USE sast_readtrack;
 
--- 用户表
-CREATE TABLE user (
-                      id BIGINT PRIMARY KEY AUTO_INCREMENT,
-                      username VARCHAR(50) UNIQUE NOT NULL,
-                      password VARCHAR(50) NOT NULL,
-                      created_at DATETIME
+-- 用户表（避免关键字冲突）
+CREATE TABLE t_user (
+                        id BIGINT PRIMARY KEY AUTO_INCREMENT,
+                        username VARCHAR(50) UNIQUE NOT NULL,
+                        password VARCHAR(100) NOT NULL,  -- 适配加密后密码
+                        created_at DATETIME DEFAULT CURRENT_TIMESTAMP  -- 默认当前时间
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 书籍表
@@ -20,9 +20,10 @@ CREATE TABLE book (
                       total_pages INT NOT NULL,
                       current_page INT DEFAULT 0,
                       user_id BIGINT,
-                      created_at DATETIME
+                      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,  -- 默认当前时间
+                      status VARCHAR(20) NOT NULL DEFAULT '0',  -- 阅读状态:0未读 1阅读中 2已读
+    -- 外键关联用户表
+                      FOREIGN KEY (user_id) REFERENCES t_user(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 添加外键约束
-ALTER TABLE `book`
-ADD CONSTRAINT `fk_book_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
