@@ -9,11 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
     /**
-     * 根据学号查询用户
-     */
-    User selectByStudentId(String studentId);
-
-    /**
      * 新增用户
      */
     int insert(User user);

@@ -7,7 +7,6 @@ USE sast_readtrack;
 -- 用户表（避免关键字冲突）
 CREATE TABLE t_user (
                         id BIGINT PRIMARY KEY AUTO_INCREMENT,
-                        student_id VARCHAR(20) UNIQUE NOT NULL,  -- 学号
                         username VARCHAR(50) UNIQUE NOT NULL,
                         password VARCHAR(100) NOT NULL,  -- 适配加密后密码
                         created_at DATETIME DEFAULT CURRENT_TIMESTAMP  -- 默认当前时间

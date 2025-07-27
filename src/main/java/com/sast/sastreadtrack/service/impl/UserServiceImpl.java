@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String studentId, String password) {
+    public User login(String username, String password) {
         //用户登录
     }
 

@@ -21,7 +21,7 @@ public class UserController {
 
     /**
      * 用户注册
-     * @param user 用户信息（包含学号、姓名、密码）
+     * @param user 用户信息（包含 、姓名、密码）
      */
     @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> register(@RequestBody User user) {
@@ -31,7 +31,7 @@ public class UserController {
 
     /**
      * 用户登录
-     * @param loginForm 登录表单（包含学号、密码）
+     * @param loginForm 登录表单（包含 、密码）
      */
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> loginForm) {
