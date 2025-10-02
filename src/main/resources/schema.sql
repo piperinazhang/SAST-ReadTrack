@@ -21,7 +21,7 @@ CREATE TABLE book (
                       current_page INT DEFAULT 0,
                       user_id BIGINT,
                       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,  -- 默认当前时间
-                      status ENUM('0', '1', '2') NOT NULL DEFAULT '0',  -- 阅读状态:0未读 1阅读中 2已读
+                      status ENUM('0', '1', '2') NOT NULL DEFAULT '0'  -- 阅读状态:0未读 1阅读中 2已读
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 

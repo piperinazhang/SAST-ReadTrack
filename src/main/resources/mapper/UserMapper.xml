@@ -5,14 +5,21 @@
 
     <!-- 新增用户 -->
     <insert id="insert" parameterType="com.sast.sastreadtrack.entity.User">
-        INSERT INTO user (username, password, created_at)
+        INSERT INTO t_user (username, password, created_at)
         VALUES (#{username}, #{password}, #{createdAt})
     </insert>
 
     <!-- 根据id查询用户 -->
     <select id="selectById" resultType="com.sast.sastreadtrack.entity.User">
-        SELECT id, name, student_id, password
-        FROM user
+        SELECT id, username, password
+        FROM t_user
         WHERE id = #{id}
+    </select>
+
+    <!-- 根据用户名查询用户 -->
+    <select id="selectByUsername" resultType="com.sast.sastreadtrack.entity.User">
+        SELECT *
+        FROM t_user
+        WHERE username = #{username}
     </select>
 </mapper>

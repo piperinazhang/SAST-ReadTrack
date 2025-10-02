@@ -1,11 +1,18 @@
 package com.sast.sastreadtrack.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
 /**
  * 书籍实体类
  * 属性：id, 用户id, 书名, 作者, 总页数, 已读页数, 阅读状态（未读/阅读中/已读）
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
     private Long id;               // 对应数据库int类型
     private Long userId;           // 对应数据库user_id字段
