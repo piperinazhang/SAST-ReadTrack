@@ -5,8 +5,8 @@
 
     <!-- 新增用户 -->
     <insert id="insert" parameterType="com.sast.sastreadtrack.entity.User">
-        INSERT INTO t_user (username, password, created_at)
-        VALUES (#{username}, #{password}, #{createdAt})
+        INSERT INTO t_user (username, password)
+        VALUES (#{username}, #{password})
     </insert>
 
     <!-- 根据id查询用户 -->
