@@ -3,6 +3,7 @@ package com.sast.sastreadtrack.service.impl;
 import com.sast.sastreadtrack.entity.User;
 import com.sast.sastreadtrack.mapper.UserMapper;
 import com.sast.sastreadtrack.service.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
@@ -19,6 +20,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+    // 创建一个加密器
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     @Transactional
     public boolean register(User user) {
@@ -27,6 +31,10 @@ public class UserServiceImpl implements UserService {
         if (existing != null) {
             throw new RuntimeException("用户名已存在");
         }
+
+        // 2. 加密密码
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
 
         /**
          * 这里的rows用了SQL语言insert操作的一个特性：
@@ -48,7 +56,9 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new RuntimeException("用户不存在");
         }
-        if (!user.getPassword().equals(password)){
+
+        // 2. 校验密码（这里变成了加密验证，不是equals）
+        if (!passwordEncoder.matches(password, user.getPassword())){
             throw new RuntimeException("密码错误，请重试");
         }
         return user;

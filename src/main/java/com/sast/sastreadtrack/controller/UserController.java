@@ -2,6 +2,7 @@ package com.sast.sastreadtrack.controller;
 
 import com.sast.sastreadtrack.entity.User;
 import com.sast.sastreadtrack.service.UserService;
+import com.sast.sastreadtrack.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,10 +58,16 @@ public class UserController {
             String password = loginForm.get("password");
             // 这里若用户名不存在或密码错误，则抛出异常
             User user = userService.login(username, password);
+
+            // 生成 JWT Token
+            String token = JwtUtil.generateToken(user.getId(), user.getUsername());
+
             // 简单 Session 存储
             session.setAttribute("user", user);
+
             result.put("success", true);
             result.put("message", "登录成功");
+            result.put("token", token);
             result.put("user", user);
             return ResponseEntity.ok(result);
         } catch (Exception e) {
