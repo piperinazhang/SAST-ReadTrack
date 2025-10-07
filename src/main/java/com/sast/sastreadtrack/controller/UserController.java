@@ -2,6 +2,7 @@ package com.sast.sastreadtrack.controller;
 
 import com.sast.sastreadtrack.entity.User;
 import com.sast.sastreadtrack.service.UserService;
+import com.sast.sastreadtrack.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,17 @@ public class UserController {
      */
     @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> register(@RequestBody User user) {
-        // TODO: 实现注册逻辑
-
+        Map<String, Object> result = new HashMap<>();
+        try {
+            boolean success = userService.register(user);
+            result.put("success", success);
+            result.put("message", "注册成功");
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(result);
+        }
     }
 
     /**
@@ -35,7 +45,24 @@ public class UserController {
      */
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> loginForm) {
-        // TODO: 实现登录逻辑
+        Map<String, Object> result = new HashMap<>();
+        try {
+            String username = loginForm.get("username");
+            String password = loginForm.get("password");
+            User user = userService.login(username, password);
 
+            // 生成 JWT Token
+            String token = JwtUtil.generateToken(user.getId(), user.getUsername());
+
+            result.put("success", true);
+            result.put("message", "登录成功");
+            result.put("token", token);
+            result.put("user", user);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(result);
+        }
     }
 }

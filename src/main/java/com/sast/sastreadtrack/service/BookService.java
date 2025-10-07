@@ -4,6 +4,7 @@ import com.sast.sastreadtrack.entity.Book;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 书籍服务接口
@@ -15,7 +16,7 @@ public interface BookService {
      * @param book 书籍信息（包含书名、作者、总页数等）
      * @return 添加成功返回true
      */
-    boolean addBook(Book book);
+    boolean addBook(Book book,Long userId);
 
     /**
      * 更新阅读进度
@@ -43,12 +44,12 @@ public interface BookService {
     /**
      * 查询用户的所有书籍
      */
-    List<Book> getUserBooks(Long userId);
+    List<Book> getUserBooks(Long userId,int pageNum, int pageSize);
 
     /**
      * 按阅读状态筛选书籍
      */
-    List<Book> getBooksByStatus(Long userId, String status);
+    List<Book> getBooksByStatus(Long userId, String status,int pageNum, int pageSize);
 
     /**
      * 模糊查询书籍
@@ -56,8 +57,8 @@ public interface BookService {
     List<Book> searchBooks(String keyword, Long userId);
 
     /**
-     * 获取阅读统计信息
+     * 获取阅读统计信息，该userid下所有的书籍信息都返回
      * @return 包含总页数和已读页数的统计信息
      */
-    Book getReadingStats(Long userId);
+    List<Book> getReadingStats(Long userId);
 }
