@@ -3,6 +3,7 @@ package com.sast.sastreadtrack.mapper;
 import com.sast.sastreadtrack.entity.Book;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 书籍数据访问层
@@ -48,5 +49,10 @@ public interface BookMapper {
     /**
      * 获取用户的阅读统计
      */
-    Book getReadingStats(Long userId);
+    List<Book> getReadingStats(Long userId);
+
+    /**
+     * 获取指定用户的某个书籍
+     */
+    Book selectByIdAndUserId(Long id, Long userId);
 }

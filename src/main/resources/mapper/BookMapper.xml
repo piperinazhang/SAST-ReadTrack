@@ -1,62 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.sast.sastreadtrack.mapper.BookMapper">
-    <!--xml文件供参考，可调整，可使用注解方法-->
-    <!-- 新增书籍 -->
-    <insert id="insert" parameterType="com.sast.sastreadtrack.entity.Book">
-        INSERT INTO book (user_id, title, author, total_pages, current_page, created_at)
-        VALUES (#{userId}, #{title}, #{author}, #{totalPages}, #{currentPage}, #{createdAt})
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO book(user_id, title, author, total_pages, current_page, status)
+        VALUES (#{userId}, #{title}, #{author}, #{totalPages}, #{currentPage}, #{status})
     </insert>
 
-    <!-- 更新阅读进度 -->
-    <update id="updateReadProgress" parameterType="com.sast.sastreadtrack.entity.Book">
+    <update id="updateReadProgress">
         UPDATE book
-        SET current_pages = #{currentPages},
+        SET
+            current_page = #{currentPage},
             status = #{status}
         WHERE id = #{id} AND user_id = #{userId}
     </update>
 
-    <!-- 更新阅读状态 -->
     <update id="updateStatus">
         UPDATE book
-        SET status = #{status}
-        WHERE id = #{bookId} AND user_id = #{userId}
+        SET
+            status = #{status},
+            current_page = #{currentPage}
+        WHERE id = #{id} AND user_id = #{userId}
     </update>
 
-    <!-- 删除书籍 -->
     <delete id="deleteById">
-        DELETE FROM book
-        WHERE id = #{id} AND user_id = #{userId}
+        DELETE FROM book WHERE id = #{id} AND user_id = #{userId}
     </delete>
 
-    <!-- 查询用户的所有书籍 -->
     <select id="selectByUserId" resultType="com.sast.sastreadtrack.entity.Book">
-        SELECT id, user_id, title, author, total_pages, current_pages, status
-        FROM book
-        WHERE user_id = #{userId}
+        SELECT * FROM book WHERE user_id = #{userId} ORDER BY created_at DESC
     </select>
 
-    <!-- 根据阅读状态查询用户的书籍 -->
     <select id="selectByUserIdAndStatus" resultType="com.sast.sastreadtrack.entity.Book">
-        SELECT id, user_id, title, author, total_pages, current_pages, status
-        FROM book
-        WHERE user_id = #{userId} AND status = #{status}
+        SELECT * FROM book WHERE user_id = #{userId} AND status = #{status} ORDER BY created_at DESC
     </select>
 
-    <!-- 模糊查询书籍 -->
     <select id="searchBooks" resultType="com.sast.sastreadtrack.entity.Book">
-        SELECT id, user_id, title, author, total_pages, current_pages, status
-        FROM book
+        SELECT * FROM book
         WHERE user_id = #{userId}
-        AND (title LIKE CONCAT('%', #{keyword}, '%') OR author LIKE CONCAT('%', #{keyword}, '%'))
+          AND (title LIKE CONCAT('%', #{keyword}, '%') OR author LIKE CONCAT('%', #{keyword}, '%'))
+        ORDER BY created_at DESC
     </select>
 
-    <!-- 获取用户的阅读统计 -->
+    <select id="selectByIdAndUserId" resultType="com.sast.sastreadtrack.entity.Book">
+        SELECT * FROM book WHERE id = #{id} AND user_id = #{userId}
+    </select>
+
     <select id="getReadingStats" resultType="com.sast.sastreadtrack.entity.Book">
-        SELECT
-            SUM(current_pages) as current_pages,
-            SUM(total_pages) as total_pages
+        SELECT *
         FROM book
         WHERE user_id = #{userId}
+        ORDER BY created_at DESC
     </select>
+
 </mapper>

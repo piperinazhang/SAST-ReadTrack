@@ -23,5 +23,6 @@ CREATE TABLE book (
                       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,  -- 默认当前时间
                       status ENUM('0', '1', '2') NOT NULL DEFAULT '0'  -- 阅读状态:0未读 1阅读中 2已读
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ALTER TABLE book MODIFY COLUMN status TINYINT NOT NULL DEFAULT 0 COMMENT '阅读状态: 0未读 1阅读中 2已读';
 
 
